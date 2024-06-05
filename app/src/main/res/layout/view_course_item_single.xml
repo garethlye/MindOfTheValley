@@ -1,0 +1,67 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <import type="android.text.TextUtils" />
+
+        <variable
+            name="courseUrl"
+            type="String" />
+
+        <variable
+            name="courseTitle"
+            type="String" />
+
+        <variable
+            name="courseSubtitle"
+            type="String" />
+
+        <variable
+            name="isLastItem"
+            type="boolean" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="@{isLastItem ? @dimen/size_20 :@dimen/size_0 }"
+        tools:background="@color/mv_bluey_bg"
+        tools:ignore="RtlSymmetry">
+
+        <ImageView
+            android:layout_width="@dimen/size_152"
+            android:layout_height="@dimen/size_228"
+            app:roundedCorner="@{true}"
+            app:imageUrl="@{courseUrl}"
+            app:centerCrop="@{true}"
+            tools:src="@color/white"/>
+
+        <TextView
+            android:layout_width="@dimen/size_152"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/size_10"
+            style="@style/Roboto.Bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_17"
+            android:text="@{courseTitle}"
+            android:maxLines="3"
+            tools:text="The Art Of Conciouse Parenting" />
+
+        <TextView
+            android:layout_width="@dimen/size_152"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/size_12"
+            style="@style/Roboto.Bold"
+            android:textColor="@color/text_subtitle"
+            android:textSize="@dimen/text_size_13"
+            android:text="@{courseSubtitle}"
+            android:maxLines="3"
+            android:textAllCaps="true"
+            android:visibility="@{TextUtils.isEmpty(courseSubtitle) ? View.GONE : View.VISIBLE}"
+            tools:text="The Art Of Conciouse Parenting" />
+    </LinearLayout>
+</layout>

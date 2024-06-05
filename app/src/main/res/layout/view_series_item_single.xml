@@ -1,0 +1,46 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="courseUrl"
+            type="String" />
+
+        <variable
+            name="courseTitle"
+            type="String" />
+
+        <variable
+            name="isLastItem"
+            type="boolean" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="20dp"
+        android:paddingEnd="@{isLastItem ? @dimen/size_20 :@dimen/size_0 }"
+        tools:background="@color/mv_bluey_bg"
+        tools:ignore="RtlSymmetry">
+
+        <ImageView
+            android:layout_width="@dimen/size_320"
+            android:layout_height="@dimen/size_172"
+            app:roundedCorner="@{true}"
+            app:imageUrl="@{courseUrl}"
+            app:centerCrop="@{true}"
+            tools:src="@color/white"/>
+
+        <TextView
+            android:layout_width="@dimen/size_320"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/size_11"
+            style="@style/Roboto.Bold"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_17"
+            android:text="@{courseTitle}"
+            tools:text="A-Fest Sardinia 2018" />
+    </LinearLayout>
+</layout>

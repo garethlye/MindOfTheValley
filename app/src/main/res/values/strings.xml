@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MindOfTheValley</string>
+    <string name="channels_txt">Channels</string>
+    <string name="new_episodes_txt">New Episodes</string>
+    <string name="browse_category_txt">Browse by categories</string>
+    <string name="cannot_load_txt">We\'re sorry\nThe application could not be loaded at this time</string>
+    <string name="no_internet_found_txt">No Internet Found\nPlease enable wifi and restart.</string>
+</resources>
