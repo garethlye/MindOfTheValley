@@ -1,7 +1,9 @@
 package com.example.mindofthevalley
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class MindValleyApplication : Application() {
 
     companion object {

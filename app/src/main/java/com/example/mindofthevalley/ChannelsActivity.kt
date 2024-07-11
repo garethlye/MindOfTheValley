@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mindofthevalley.databinding.ActivityChannelsBinding
 import com.example.mindofthevalley.util.NetworkUtils
 import com.google.gson.Gson
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChannelsActivity : BaseActivity() {
     lateinit var binding: ActivityChannelsBinding
     private var gridLayoutManager = GridLayoutManager(this, 2)

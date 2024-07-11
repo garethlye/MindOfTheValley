@@ -9,11 +9,18 @@ import com.example.mindofthevalley.adapters.CategoryAdapter
 import com.example.mindofthevalley.adapters.ChannelsAdapter
 import com.example.mindofthevalley.adapters.EpisodesAdapter
 import com.example.mindofthevalley.data.Data
+import com.example.mindofthevalley.interactor.ChannelsInteractor
 import com.example.mindofthevalley.network.ChannelsAPI
 import com.example.mindofthevalley.util.CustomLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ChannelsViewModelImpl constructor(application: Application): BaseViewModelImpl(application), ChannelsAdapter.Interaction {
+@HiltViewModel
+class ChannelsViewModelImpl @Inject constructor(
+    application: Application,
+    private val channelsInteractor: ChannelsInteractor
+    ): BaseViewModelImpl(application), ChannelsAdapter.Interaction {
 
     val channelsAdapter = ChannelsAdapter(this)
     val categoryAdapter = CategoryAdapter()
@@ -28,10 +35,9 @@ class ChannelsViewModelImpl constructor(application: Application): BaseViewModel
             try {
                 onLoading()
                 showSwipeToRefreshLoading.set(false)
-                val apiBase = getApiNetwork().create(ChannelsAPI::class.java)
-                val episodesResponse = apiBase.getEpisodes()
-                val channelsResponse = apiBase.getChannels()
-                val categoryResponse = apiBase.getCategories()
+                val episodesResponse = channelsInteractor.getEpisodes()
+                val channelsResponse = channelsInteractor.getChannels()
+                val categoryResponse = channelsInteractor.getCategories()
                 var savedData = Data(null, null, null)
                 if(channelsResponse.data?.channels != null) {
                     populateViews(channelsResponse.data, BaseActivity.DataType.Channels)
