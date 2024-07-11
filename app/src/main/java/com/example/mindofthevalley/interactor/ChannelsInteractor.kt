@@ -1,10 +1,11 @@
 package com.example.mindofthevalley.interactor
 
-import android.content.Context
+import com.example.mindofthevalley.manager.AppDataManager
 import com.example.mindofthevalley.network.ChannelsAPI
 import com.example.mindofthevalley.network.ChannelsApiResponse
 
-class ChannelsInteractor(private val channelsAPI: ChannelsAPI) {
+class ChannelsInteractor(val appDataManager: AppDataManager,
+                         private val channelsAPI: ChannelsAPI) {
 
     suspend fun getEpisodes(): ChannelsApiResponse {
         return channelsAPI.getEpisodes()

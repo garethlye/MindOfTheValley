@@ -1,7 +1,7 @@
 package com.example.mindofthevalley.di
 
-import android.content.Context
 import com.example.mindofthevalley.interactor.ChannelsInteractor
+import com.example.mindofthevalley.manager.AppDataManager
 import com.example.mindofthevalley.network.ChannelsAPI
 import dagger.Module
 import dagger.Provides
@@ -15,7 +15,8 @@ object InteractorModule {
     @Provides
     fun provideUserInteractor(
         channelsAPI: ChannelsAPI,
+        appDataManager: AppDataManager
     ): ChannelsInteractor =
-        ChannelsInteractor(channelsAPI)
+        ChannelsInteractor(appDataManager, channelsAPI)
 
 }

@@ -12,3 +12,7 @@ data class Data(
     @SerializedName("media")
     var newEpisodes: ArrayList<Course>?,
 )
+
+enum class DataType {
+    Category, Episodes, Channels, All
+}

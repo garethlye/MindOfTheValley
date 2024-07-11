@@ -43,6 +43,7 @@ android {
 
 dependencies {
 
+    // Baseline Related
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation "androidx.activity:activity-ktx:1.1.0"
     implementation 'androidx.multidex:multidex:2.0.1'
@@ -67,4 +68,7 @@ dependencies {
     // Dependency Injection
     implementation 'com.google.dagger:hilt-android:2.46.1'
     kapt 'com.google.dagger:hilt-android-compiler:2.46.1'
+
+    // Architecture Related
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
 }
