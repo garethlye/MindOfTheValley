@@ -17,5 +17,6 @@
     <color name="text_subtitle">#95989D</color>
     <color name="black_with_opacity_20">#80000000</color>
     <color name="loading_bg">#191F26</color>
+    <color name="color_gray_alpha_30">#4c808080</color>
 
 </resources>

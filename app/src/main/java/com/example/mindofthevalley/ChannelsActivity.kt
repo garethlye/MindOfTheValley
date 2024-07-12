@@ -19,15 +19,16 @@ class ChannelsActivity : BaseActivity() {
     }
 
     override fun setupView() {
+        binding.recyclerView.adapter = viewModel.channelsAdapter
+        binding.categoriesRv.adapter = viewModel.categoryAdapter
+        binding.newEpisodesView.channelsRv.adapter = viewModel.episodesAdapter
+        binding.categoriesRv.layoutManager = gridLayoutManager
+
         if(NetworkUtils.isNetworkConnected(this)) {
-            binding.recyclerView.adapter = viewModel.channelsAdapter
-            binding.categoriesRv.adapter = viewModel.categoryAdapter
-            binding.newEpisodesView.channelsRv.adapter = viewModel.episodesAdapter
-            binding.categoriesRv.layoutManager = gridLayoutManager
             viewModel.setupView()
             return
         }
-        viewModel.onNoInternetFound()
+        viewModel.tryToLoadBackup()
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

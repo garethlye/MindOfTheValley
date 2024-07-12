@@ -1,6 +1,7 @@
 package com.example.mindofthevalley
 
 import android.app.Application
+import android.view.View
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.AndroidViewModel
 
@@ -24,14 +25,17 @@ open class BaseViewModelImpl (application: Application): AndroidViewModel(applic
     override fun onLoading() {
         loadingViewVisibility.set(true)
         emptyViewVisibility.set(false)
+        noInternetViewVisibility.set(false)
     }
 
     override fun onContent() {
+        noInternetViewVisibility.set(false)
         loadingViewVisibility.set(false)
         emptyViewVisibility.set(false)
     }
 
     override fun onEmpty() {
+        noInternetViewVisibility.set(false)
         loadingViewVisibility.set(false)
         emptyViewVisibility.set(true)
     }
@@ -40,5 +44,9 @@ open class BaseViewModelImpl (application: Application): AndroidViewModel(applic
         noInternetViewVisibility.set(true)
         emptyViewVisibility.set(false)
         loadingViewVisibility.set(false)
+    }
+
+    override fun onRetryClicked(view: View) {
+
     }
 }

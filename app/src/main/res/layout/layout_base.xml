@@ -74,7 +74,7 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:background="@color/mv_bluey_bg"
-                android:visibility="@{viewModel.noInternetViewVisibility, default=gone}">
+                android:visibility="@{viewModel.noInternetViewVisibility, default=visible}">
 
                 <ImageView
                     android:layout_width="@dimen/size_172"
@@ -89,6 +89,18 @@
                     android:gravity="center_horizontal"
                     style="@style/Roboto.Bold"
                     android:text="@string/no_internet_found_txt"/>
+
+                <TextView
+                    android:layout_width="@dimen/size_172"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size_15"
+                    android:padding="@dimen/size_12"
+                    android:textColor="@color/white"
+                    android:gravity="center_horizontal"
+                    android:background="@drawable/bg_rounded_light"
+                    style="@style/Roboto.Bold"
+                    android:text="@string/try_again_txt"
+                    android:onClick="@{viewModel::onRetryClicked}"/>
             </LinearLayout>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.drawerlayout.widget.DrawerLayout>

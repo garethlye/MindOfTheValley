@@ -1,5 +1,6 @@
 package com.example.mindofthevalley
 
+import android.view.View
 import androidx.databinding.ObservableBoolean
 
 interface BaseViewModel {
@@ -17,4 +18,6 @@ interface BaseViewModel {
     fun onEmpty()
 
     fun onNoInternetFound()
+
+    fun onRetryClicked(view: View)
 }

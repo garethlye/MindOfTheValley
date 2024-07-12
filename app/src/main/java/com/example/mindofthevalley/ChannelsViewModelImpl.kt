@@ -3,6 +3,7 @@ package com.example.mindofthevalley
 import android.app.Application
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.viewModelScope
 import com.example.mindofthevalley.adapters.CategoryAdapter
@@ -53,15 +54,22 @@ class ChannelsViewModelImpl @Inject constructor(
                 }, 2000)
 
             } catch (e: Exception) {
-                //assume one or more API failed
-                //check for local storage if data is available
-                val backupData = channelsInteractor.appDataManager.getLastConnectedData()
-                if(backupData != null) {
-                    //backup data isn't null, populate views with previous data
-                    populateViews(backupData, DataType.All)
-                }
+                //assume one or more API failed or an exception
+                tryToLoadBackup()
             }
         }
+    }
+
+    fun tryToLoadBackup() {
+        val backupData = channelsInteractor.appDataManager.getLastConnectedData()
+        if(backupData != null) {
+            //backup data isn't null, populate views with previous data
+            populateViews(backupData, DataType.All)
+            onContent()
+            return
+        }
+        //if no backups detected, show no internet screen
+        onNoInternetFound()
     }
 
     fun populateViews(data: Data, type: DataType) {
@@ -83,11 +91,20 @@ class ChannelsViewModelImpl @Inject constructor(
         }
     }
 
-    fun onRefresh() {
+    fun onSwipeRefresh() {
         showSwipeToRefreshLoading.set(true)
+        onRefresh()
+    }
+
+    fun onRefresh() {
         channelsAdapter.submitList(emptyList())
         categoryAdapter.submitList(emptyList())
         episodesAdapter.submitList(emptyList())
         setupView()
+    }
+
+    override fun onRetryClicked(view: View) {
+        super.onRetryClicked(view)
+        onRefresh()
     }
 }

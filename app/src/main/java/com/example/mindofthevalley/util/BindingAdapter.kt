@@ -1,5 +1,6 @@
 package com.example.mindofthevalley.util
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
@@ -56,6 +57,7 @@ fun setVisibility(view: View, value: Boolean?) {
     }
 }
 
+@SuppressLint("CheckResult")
 @BindingAdapter("loadGif")
 fun setImageViewGif(
     imageView: ImageView,
@@ -65,4 +67,17 @@ fun setImageViewGif(
         .load(resource)
         .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
         .into(imageView)
+
+    val glideInstance = Glide.with(imageView.context)
+        .load(resource)
+    if(NetworkUtils.isNetworkConnected(imageView.context)) {
+        //cache only when internet is available
+        glideInstance
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+    } else {
+        //use cache when internet is not available
+        glideInstance
+            .onlyRetrieveFromCache(true)
+    }
+    glideInstance.into(imageView)
 }
