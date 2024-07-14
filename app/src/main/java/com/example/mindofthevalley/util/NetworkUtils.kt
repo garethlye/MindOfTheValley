@@ -21,7 +21,7 @@ object NetworkUtils {
             }
         } else {
             val nwInfo = connectivityManager.activeNetworkInfo ?: return false
-            return nwInfo.isConnected
+            return nwInfo.isConnected //deprecated but still required for backwards compatibility
         }
     }
 }
