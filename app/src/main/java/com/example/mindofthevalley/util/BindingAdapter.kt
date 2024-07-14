@@ -5,7 +5,6 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -14,11 +13,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import com.example.mindofthevalley.R
 
-@BindingAdapter("refreshing")
-fun bindRefreshing(swipeRefreshLayout: SwipeRefreshLayout, refreshing: Boolean) {
-    swipeRefreshLayout.isRefreshing = refreshing
-}
-
+@SuppressLint("CheckResult")
 @BindingAdapter(value = ["imageUrl", "default", "roundAsCircle", "centerCrop", "roundedCorner"], requireAll = false)
 fun setImageViewUrl(
     imageView: ImageView,
@@ -31,8 +26,16 @@ fun setImageViewUrl(
     var requestBuilder = Glide.with(imageView.context)
         .asBitmap()
         .load(url)
-        .diskCacheStrategy(DiskCacheStrategy.ALL) //enable caching to reduce load on network, can switch to RESOURCE if uses too much ram+storage
         .placeholder(R.drawable.icon_default)
+    if(NetworkUtils.isNetworkConnected(imageView.context)) {
+        //cache only when internet is available
+        requestBuilder
+            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+    } else {
+        //use cache when internet is not available
+        requestBuilder
+            .onlyRetrieveFromCache(true)
+    }
     if(centerCrop == true && roundedCorner == true) {
         requestBuilder = requestBuilder.transform(MultiTransformation(CenterCrop(), RoundedCorners(20)))
     } else {
@@ -67,17 +70,4 @@ fun setImageViewGif(
         .load(resource)
         .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
         .into(imageView)
-
-    val glideInstance = Glide.with(imageView.context)
-        .load(resource)
-    if(NetworkUtils.isNetworkConnected(imageView.context)) {
-        //cache only when internet is available
-        glideInstance
-            .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-    } else {
-        //use cache when internet is not available
-        glideInstance
-            .onlyRetrieveFromCache(true)
-    }
-    glideInstance.into(imageView)
 }

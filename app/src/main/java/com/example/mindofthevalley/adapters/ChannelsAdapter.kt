@@ -9,7 +9,7 @@ import com.example.mindofthevalley.data.Channel
 import com.example.mindofthevalley.databinding.ViewCourseItemBinding
 import com.example.mindofthevalley.databinding.ViewSeriesItemBinding
 
-class ChannelsAdapter(private val interaction: Interaction? = null) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class ChannelsAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         const val Course = 0
         const val Series = 1
@@ -32,10 +32,10 @@ class ChannelsAdapter(private val interaction: Interaction? = null) : RecyclerVi
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
             Course -> {
-                CourseViewHolder(ViewCourseItemBinding.inflate(inflater, parent, false), interaction)
+                CourseViewHolder(ViewCourseItemBinding.inflate(inflater, parent, false))
             }
             Series -> {
-                SeriesViewHolder(ViewSeriesItemBinding.inflate(inflater, parent, false), interaction)
+                SeriesViewHolder(ViewSeriesItemBinding.inflate(inflater, parent, false))
             }
             else -> throw IllegalArgumentException("Invalid view holder type")
         }
@@ -70,13 +70,8 @@ class ChannelsAdapter(private val interaction: Interaction? = null) : RecyclerVi
         }
     }
 
-    interface Interaction {
-        //fun onCourseClicked(position: Int, item: Course, itemView: View)
-        //add onClick interactions here, handled by the viewModel extending this
-    }
-
     //same general object but using two different views depending on values received, should use the same adapter
-    inner class CourseViewHolder(private val binding: ViewCourseItemBinding,  private val interaction: Interaction?): RecyclerView.ViewHolder(binding.root) {
+    inner class CourseViewHolder(private val binding: ViewCourseItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Channel) {
             binding.courseTitle = data.title
             binding.courseSeriesNum = data.mediaCount.toString() + " episodes"
@@ -88,7 +83,7 @@ class ChannelsAdapter(private val interaction: Interaction? = null) : RecyclerVi
         }
     }
 
-    inner class SeriesViewHolder(private val binding: ViewSeriesItemBinding,  private val interaction: Interaction?): RecyclerView.ViewHolder(binding.root) {
+    inner class SeriesViewHolder(private val binding: ViewSeriesItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Channel) = with (binding) {
             binding.courseTitle = data.title
             binding.courseSeriesNum = data.mediaCount.toString() + " series"

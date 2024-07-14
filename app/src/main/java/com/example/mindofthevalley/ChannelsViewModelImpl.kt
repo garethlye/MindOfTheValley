@@ -20,9 +20,9 @@ import javax.inject.Inject
 class ChannelsViewModelImpl @Inject constructor(
     application: Application,
     private val channelsInteractor: ChannelsInteractor,
-    ): BaseViewModelImpl(application), ChannelsAdapter.Interaction {
+    ): BaseViewModelImpl(application) {
 
-    val channelsAdapter = ChannelsAdapter(this)
+    val channelsAdapter = ChannelsAdapter()
     val categoryAdapter = CategoryAdapter()
     val episodesAdapter = EpisodesAdapter()
     val showSwipeToRefreshLoading = ObservableBoolean()

@@ -20,7 +20,7 @@ class AppDataManager(private val lastConnectedDataStore: DataStore<Preferences>)
         val LAST_CONNECTED_DATA = stringPreferencesKey(com.example.mindofthevalley.di.LAST_CONNECTED_DATA)
     }
 
-    fun updateLastConnectedData(data: Data) {
+    fun updateLastConnectedData(data: Data?) {
         val jsonData = gson.toJson(data)
         return runBlocking {
             lastConnectedDataStore.edit {

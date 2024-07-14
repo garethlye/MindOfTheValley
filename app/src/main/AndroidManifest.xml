@@ -19,6 +19,13 @@
             android:theme="@style/Theme.MindOfTheValley"
             android:configChanges="orientation|screenSize|smallestScreenSize"
             android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".channels.MainChannelsActivity"
+            android:theme="@style/Theme.MindOfTheValley"
+            android:configChanges="orientation|screenSize|smallestScreenSize"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
