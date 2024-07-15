@@ -3,6 +3,7 @@
 
 ![ic_loading](https://github.com/garethlye/MindOfTheValley/assets/24999634/52c9231d-3177-4de6-9d98-b28627b1de1d)
 
+![MV FlowChart](https://github.com/user-attachments/assets/9a9e3750-c55d-4c92-9a0f-645635dc7805)
 
 
 ## Project Overview
@@ -30,6 +31,7 @@ These were neccessary to make the codebase look cleaner, run more efficiently an
 - Offline mode has been added and tested by saving the Data() object into Shared preferences, if the app launches and internet is not present, it will attempt to load the backup JSON.
   Cached Images will display along with the appropriate titles and text. IF no internet is present, and no offline backup detected, it will display an internet error screen where the user
   is able to press try again in an attempt to load the APIs again when the internet becomes available. If no internet persists, it will come back to the same no internet screen.
+  **[Refer to flowchart image above for more viewable information]**
 
 - The application is technically deployment-ready, i've tested it on a simulated Android 19 - 30 device, and my own person Android 32 device, but obviously it lacks production keystore keys
   to deploy to deploy to Google Play. Can be altered off-design if required.
