@@ -19,13 +19,13 @@ import kotlinx.coroutines.launch
 class MainChannelsActivity : BaseActivity() {
 
     lateinit var binding: ActivityMainChannelsBinding
-    private var gridLayoutManager = GridLayoutManager(this, 2)
-    private val viewModel: MainChannelsViewModel by viewModels()
+    var gridLayoutManager = GridLayoutManager(this, 2)
+    val viewModel: MainChannelsViewModel by viewModels()
     override val layoutResource = R.layout.activity_main_channels
 
-    private val channelsAdapter = ChannelsAdapter()
-    private val categoryAdapter = CategoryAdapter()
-    private val episodesAdapter = EpisodesAdapter()
+    var channelsAdapter = ChannelsAdapter()
+    var categoryAdapter = CategoryAdapter()
+    var episodesAdapter = EpisodesAdapter()
 
     override fun bindViewModel() {
         binding = initBinding(viewModel)
